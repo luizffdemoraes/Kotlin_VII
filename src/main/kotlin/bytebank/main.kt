@@ -21,8 +21,8 @@ package br.com.alura.bytebank
  */
 
 fun main() {
-//    testaTipoFuncaoReferencia()
-//    testaTipoFuncaoClasse()
+    testaTipoFuncaoReferencia()
+    testaTipoFuncaoClasse()
 
     /*
      2 Recursos para inicializar o tipo função
@@ -36,42 +36,51 @@ fun main() {
      Então isso é uma implementação de uma função anônima.
      */
 
-    val minhaFuncaoLambda =  {
-        println("Executa como lambda")
-    }
-    println(minhaFuncaoLambda())
-
-
-    val minhaFuncaoAnonima: () -> Unit = fun() {
-        println("Executa como anonima")
-    }
-    println(minhaFuncaoAnonima())
+//    val minhaFuncaoLambda =  {
+//        println("Executa como lambda")
+//    }
+//    println(minhaFuncaoLambda())
+//
+//
+//    val minhaFuncaoAnonima: () -> Unit = fun() {
+//        println("Executa como anonima")
+//    }
+//    println(minhaFuncaoAnonima())
 }
 
 fun testaTipoFuncaoClasse() {
     //Similares objeto de classe
-//    val minhaFuncaoClasse: () -> Unit = Teste()
-    val minhaFuncaoClasse = Teste()
-    println(minhaFuncaoClasse())
+//    val minhaFuncaoClasse = Soma()
+    val minhaFuncaoClasse: (Int, Int) -> Int = Soma()
+    /*
+        Só passamos os parametros quando chamamos o Invoke a
+         avaliação e feita so quando executamos a chamada - lazy evaluation
+     */
+    println(minhaFuncaoClasse(10, 10))
 }
 
 fun testaTipoFuncaoReferencia() {
-    //Similares referencia de função
-//    val minhaFuncao: () -> Unit = ::teste
-    val minhaFuncao = ::teste
-    println(minhaFuncao())
+    /*
+     Similares referencia de função
+     Ao inferir o KFunction0 essa referência que representa uma função quando é feito a introspecção
+     é uma tecnica de reflection
+
+     Quando nós vamos usar o tipo função, ele precisa ser igual a referência da função
+     que estamos mandando ou igual ao que nós estamos querendo inicializar.
+     */
+    val minhaFuncao: (Int, Int) -> Int = ::soma
+//    val minhaFuncao = ::soma
+    println(minhaFuncao(5, 10))
 }
 
 //Compativel com assinatura
-fun teste() {
-    println("executa teste")
+//shift + f6 para alterar a função de teste para soma
+fun soma(a: Int, b: Int): Int {
+    return a + b
 }
 
-
-class Teste : () -> Unit {
-    override fun invoke() {
-        println("executa invoke do Teste")
-    }
-
+//Alterar assinatura
+class Soma : (Int, Int) -> Int {
+    override fun invoke(a: Int, b: Int): Int = a + b
 }
 
