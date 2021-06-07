@@ -70,6 +70,42 @@ fun main() {
         return a + b
     }
     println(minhaFuncaoAnonima(10, 2))
+
+    /*
+    Situação que vai ser comum no dia a dia de vocês e que pode causar algumas
+    dúvidas e até mesmo dificuldades. Qual seria essa situação?
+
+    Nós vamos ter uma função que recebe apenas um único parâmetro e tem a possibilidade
+    de ter mais de um retorno. Como que eu consigo fazer um retorno que não seja apenas
+    a última instrução.
+
+    O “it” fica disponível exatamente em tipos de funções que tem apenas um único parâmetro,
+    assim como vimos no “let”.
+
+    Expressão lambda sempre retorna a ultima instrução
+
+    Vamos retornar a partir de labels
+     */
+
+
+
+    //Exemplo de retorno multiplo utilizando labels em uma expressão lambda evitar usar um pouco It
+    val calculaBonificacao: (salario: Double) -> Double = lambda@{ salario ->
+        if(salario > 1000.0){
+          return@lambda salario + 50
+        }
+        return@lambda salario + 100.0
+    }
+    println(calculaBonificacao(1000.0))
+
+    //Exemplo de retorno multiplo utilizando função anonima
+    val calculaBonificacaoAnonima: (salario: Double) -> Double = fun(salario: Double): Double{
+        if(salario > 1000.0){
+            return salario + 50
+        }
+        return salario + 100.0
+    }
+    println(calculaBonificacaoAnonima(1000.0))
 }
 
 fun testaTipoFuncaoClasse() {
