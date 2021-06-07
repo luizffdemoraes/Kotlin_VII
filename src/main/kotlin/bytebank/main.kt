@@ -21,14 +21,45 @@ package br.com.alura.bytebank
  */
 
 fun main() {
-    //Similares
+//    testaTipoFuncaoReferencia()
+//    testaTipoFuncaoClasse()
+
+    /*
+     2 Recursos para inicializar o tipo função
+     - expressão lambda ou uma função anônima,
+     elas ficam muito vinculadas à nossa variável.
+
+     função anônima:
+     Basicamente nós vamos declarar como se tivesse uma função e aqui dentro
+     nós colocamos uma função que seja compatível ao tipo que nós queremos,
+     que seria uma função que não tem nenhum parâmetro e ela não retorna nada.
+     Então isso é uma implementação de uma função anônima.
+     */
+
+    val minhaFuncaoLambda =  {
+        println("Executa como lambda")
+    }
+    println(minhaFuncaoLambda())
+
+
+    val minhaFuncaoAnonima: () -> Unit = fun() {
+        println("Executa como anonima")
+    }
+    println(minhaFuncaoAnonima())
+}
+
+fun testaTipoFuncaoClasse() {
+    //Similares objeto de classe
+//    val minhaFuncaoClasse: () -> Unit = Teste()
+    val minhaFuncaoClasse = Teste()
+    println(minhaFuncaoClasse())
+}
+
+fun testaTipoFuncaoReferencia() {
+    //Similares referencia de função
 //    val minhaFuncao: () -> Unit = ::teste
     val minhaFuncao = ::teste
     println(minhaFuncao())
-    //Similares
-//    val minhaFuncaoClasses: () -> Unit = Teste()
-    val minhaFuncaoClasses = Teste()
-    println(minhaFuncaoClasses())
 }
 
 //Compativel com assinatura
