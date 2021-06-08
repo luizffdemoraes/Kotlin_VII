@@ -13,8 +13,9 @@ fun main() {
     //O let sempre vai ter a chamada a partir de um objeto
     //chamadas encadeadas
     Endereco(logradouro = "rua vergueiro", numero = 3185)
-        .let { endereco ->
-            "${endereco.logradouro}, ${endereco.numero}".toUpperCase()
+            //apply é um recever não temos acesso a argumento
+        .apply {
+            "$logradouro, $numero".toUpperCase()
         }.let (::println)
 
     listOf(Endereco(complemento = "casa"),
