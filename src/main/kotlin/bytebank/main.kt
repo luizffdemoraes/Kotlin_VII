@@ -10,34 +10,45 @@ fun main() {
 //    val enderecoEmMaiusculo = "${endereco.logradouro}, ${endereco.numero}".toUpperCase()
 //    println(enderecoEmMaiusculo)
 
+    run {
+        println("Execução do run sem extensão")
+    }
 
     //O let sempre vai ter a chamada a partir de um objeto
     //chamadas encadeadas
-    Endereco(logradouro = "rua vergueiro", numero = 3185)
-            //Funcoes de escopo
-            //apply é um recever não temos acesso a argumento
-        .run {
-            //foi retronado o this.Endereco por isso não retornou maiusculo
-            "$logradouro, $numero".toUpperCase()
-        }.let { enderecoEmMaiusculo: String ->
-            println(enderecoEmMaiusculo)
+    val endereco: Endereco = Endereco()
+        .also{println("Criando endereço") }
+        .apply {
+            logradouro = "rua vergueiro"
+            numero = 3185
         }
+    //Funcoes de escopo
+    //apply é um recever não temos acesso a argumento
+    //with trabalha como não fosse uma extensão e sim um argumento
+    with(endereco) {
+        //foi retronado o this.Endereco por isso não retornou maiusculo
+        "$logradouro, $numero".toUpperCase()
+    }.let { enderecoEmMaiusculo: String ->
+        println(enderecoEmMaiusculo)
+    }
 //        .let (::println)
 
-    listOf(Endereco(complemento = "casa"),
+    listOf(
+        Endereco(complemento = "casa"),
         Endereco(),
-        Endereco(complemento = "apartamento"))
-        .filter (predicate = { endereco -> endereco.complemento.isNotEmpty() })
+        Endereco(complemento = "apartamento")
+    )
+        .filter(predicate = { endereco -> endereco.complemento.isNotEmpty() })
         .let(::println)
         .let(block = (::println))
 
     //Isso aqui só acontece quando a função falar que esse codigo foi executado
-    soma(1,5, resultado = {valor ->
+    soma(1, 5, resultado = { valor ->
 
         println(valor)
     })
     //Isso aqui só acontece quando a função falar que esse codigo foi executado
-    soma(1,5, resultado = (::println))
+    soma(1, 5, resultado = (::println))
 
     val autenticavel = object : Autenticavel {
         val senha = 1234
@@ -47,12 +58,12 @@ fun main() {
     SistemaInterno().entra(autenticavel, 1234, autenticado = {
         println("realizar Pagamento")
     })
-
 }
+
 //Variações
-fun soma(a: Int, b: Int, resultado:(Int) -> Unit){
+fun soma(a: Int, b: Int, resultado: (Int) -> Unit) {
     println("antes da soma")
-    resultado(a+b)
+    resultado(a + b)
     println("depois da soma")
 }
 //Normal
