@@ -10,13 +10,19 @@ fun main() {
 //    val enderecoEmMaiusculo = "${endereco.logradouro}, ${endereco.numero}".toUpperCase()
 //    println(enderecoEmMaiusculo)
 
+
     //O let sempre vai ter a chamada a partir de um objeto
     //chamadas encadeadas
     Endereco(logradouro = "rua vergueiro", numero = 3185)
+            //Funcoes de escopo
             //apply é um recever não temos acesso a argumento
-        .apply {
+        .run {
+            //foi retronado o this.Endereco por isso não retornou maiusculo
             "$logradouro, $numero".toUpperCase()
-        }.let (::println)
+        }.let { enderecoEmMaiusculo: String ->
+            println(enderecoEmMaiusculo)
+        }
+//        .let (::println)
 
     listOf(Endereco(complemento = "casa"),
         Endereco(),
